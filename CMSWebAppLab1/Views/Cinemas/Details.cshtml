@@ -1,0 +1,30 @@
+﻿@model CMSWebAppLab1.Models.Cinema
+
+@{
+    ViewData["Title"] = "Деталі";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <h4>Кінотеатр</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Назва:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CinemaName)
+        </dd>
+        <dt class = "col-sm-2">
+            Адреса:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Редагувати</a> |
+    <a asp-action="Index">Повернутися до списку</a>
+</div>

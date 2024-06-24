@@ -1,0 +1,43 @@
+﻿@model BuyTicketViewModel
+
+@{
+    ViewData["Title"] = "Купити квиток";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Фільм: @Model.MovieTitle</h4>
+    <h4>Кінотеатр: @Model.CinemaName</h4>
+    <h4>Зала: @Model.HallName</h4>
+    <h4>Початок: @Model.StartTime</h4>
+    <h4>Ціна: @Model.Price.ToString("C")</h4>
+</div>
+
+@if (Model.AvailableSeats != null && Model.AvailableSeats.Any())
+{
+    <form asp-controller="Tickets" asp-action="Buy" method="post">
+        <input type="hidden" asp-for="SessionId" />
+        <div class="form-group">
+            <label asp-for="SelectedSeat" class="control-label">Оберіть місце:</label>
+            <select asp-for="SelectedSeat" class="form-control" asp-items="@(new SelectList(Model.AvailableSeats))"></select>
+            <span asp-validation-for="SelectedSeat" class="text-danger"></span>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <input type="submit" value="Купити квиток" class="btn btn-primary" />
+        </div>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning">
+        <strong>Немає вільних місць.</strong>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

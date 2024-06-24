@@ -1,0 +1,20 @@
+﻿@model TicketConfirmationViewModel
+
+@{
+    ViewData["Title"] = "Підтвердження купівлі";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Дякуємо Вам за покупку квитка!</h4>
+    <p>Фільм: @Model.MovieTitle</p>
+    <p>Кінотеатр: @Model.CinemaName</p>
+    <p>Зала: @Model.HallName</p>
+    <p>Початок: @Model.StartTime</p>
+    <p>Місце: @Model.TicketPlaceNumber</p>
+    <p>Дата продажу: @Model.TicketSoldDateTime</p>
+    <p>Ціна: @Model.Price.ToString("C")</p>
+</div>
+
+<a asp-action="Index" asp-controller="Home" class="btn btn-primary">Повернутися на Головну</a>

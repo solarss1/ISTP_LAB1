@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CMSWebAppLab1.Models.Cinema>
+
+@{
+    ViewData["Title"] = "Кінотеатри";
+}
+
+<h1>CRUD: Кінотеатри</h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Створити новий запис</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Назва
+            </th>
+            <th>
+                Адреса
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CinemaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {    
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a><span> | </span>
+                    }
+                <a asp-action="Details" asp-route-id="@item.Id">Деталі</a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a><span> | </span>
+                    }
+                <a asp-action="CinemaHalls" asp-route-id="@item.Id">Показати зали</a> |
+                <a asp-action="CinemaSessions" asp-route-id="@item.Id">Показати сеанси</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<style>
+    .no-border-table {
+        border-collapse: collapse;
+    }
+
+        .no-border-table td {
+            border: none; /* Make borders invisible */
+            padding: 8px; /* Optional: Adjust padding as needed */
+        }
+</style>
+@if (User.IsInRole("Admin"))
+{
+    <form asp-action="ExportCinemaSessions" method="get">
+        <table class="no-border-table">
+            <tr>
+                <td>
+                    <label for="format" class="sr-only">Оберіть формат звіту:</label>
+                </td>
+                <td>
+                    <select name="format" id="format" class="form-control">
+                        <option value="xlsx">Excel (.xlsx)</option>
+                        <option value="docx">Word (.docx)</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Згенерувати</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+}

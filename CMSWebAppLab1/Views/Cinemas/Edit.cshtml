@@ -1,0 +1,40 @@
+﻿@model CMSWebAppLab1.Models.Cinema
+
+@{
+    ViewData["Title"] = "Редагування";
+}
+
+<h1>Редагувати інформацію про кінотеатр</h1>
+
+<h4>Кінотеатр</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CinemaName" class="control-label">Назва:</label>
+                <input asp-for="CinemaName" class="form-control" />
+                <span asp-validation-for="CinemaName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Адреса:</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Повернутися до списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

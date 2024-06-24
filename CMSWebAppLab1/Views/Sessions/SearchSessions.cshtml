@@ -1,0 +1,62 @@
+﻿@model SessionSearchViewModel
+
+@{
+    ViewData["Title"] = "Пошук сеансу";
+}
+
+<div class="content-wrapper">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-controller="Sessions" asp-action="SearchSessions" method="post">
+        <div class="form-group">
+            <label for="MovieName">Фільм:</label>
+            <input type="text" id="Title" name="Title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="ActorName">Актор:</label>
+            <input type="text" id="ActorName" name="ActorName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="DirectorName">Режисер:</label>
+            <input type="text" id="DirectorName" name="DirectorName" class="form-control" />
+        </div>
+        <p></p>
+        <button type="submit" class="btn btn-primary">Пошук</button>
+    </form>
+
+    @if (Model.Sessions != null && Model.Sessions.Count > 0)
+    {
+        <h3>Результат пошуку:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Фільм</th>
+                    <th>Актор</th>
+                    <th>Режисер</th>
+                    <th>Початок</th>
+                    <th>Ціна</th>
+                    <th>Кінотеатр</th>
+                    <th>Зал</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var session in Model.Sessions)
+                {
+                    <tr>
+                        <td>@session.Title</td>
+                        <td>@session.ActorName</td>
+                        <td>@session.DirectorName</td>
+                        <td>@session.StartTime.ToString("g")</td>
+                        <td>@session.Price.ToString("C")</td>
+                        <td>@session.CinemaName</td>
+                        <td>@session.HallName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.Sessions != null)
+    {
+        <p>Жодної сесії не знайдено.</p>
+    }
+</div>

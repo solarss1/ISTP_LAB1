@@ -1,0 +1,36 @@
+﻿@model CMSWebAppLab1.Models.Cinema
+
+@{
+    ViewData["Title"] = $"Сеанси в кінотеатрі {Model.CinemaName}";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@foreach (var hall in Model.Halls)
+{
+    <h3>Зала: @hall.HallName</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Назва фільму</th>
+                <th>Тривалість, хв</th>
+                <th>Жанр</th>
+                <th>Початок сеансу</th>
+                <th>Ціна</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var session in hall.Sessions)
+            {
+                <tr>
+                    <td>@session.Movie.Title</td>
+                    <td>@session.Movie.Duration</td>
+                    <td>@session.Movie.Genre</td>
+                    <td>@session.StartTime.ToString("g")</td>
+                    <td>@session.Price.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a asp-action="Index">Повернутися до списку</a>

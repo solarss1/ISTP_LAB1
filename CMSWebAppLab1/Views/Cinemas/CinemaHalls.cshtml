@@ -1,0 +1,27 @@
+﻿@model CMSWebAppLab1.Models.Cinema
+
+@{
+    ViewData["Title"] = $"Зали в кінотеатрі {Model.CinemaName}";
+}
+
+<h2>@ViewData["Title"]</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Назва зали</th>
+            <th>Загальна кількість місць</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hall in Model.Halls)
+        {
+            <tr>
+                <td>@hall.HallName</td>
+                <td>@hall.MaxPlaces</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Повернутися до списку</a>
+</div>

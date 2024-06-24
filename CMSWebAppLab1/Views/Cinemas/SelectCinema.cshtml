@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Оберіть кінотеатр";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="CinemaSessions" method="get">
+    <div class="form-group">
+        <label for="id">Кінотеатр:</label>
+        <select id="id" name="id" asp-items="ViewBag.CinemaId" class="form-control">
+            <option value="">Клацніть для вибору</option>
+        </select>
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary">Показати сеанси</button>
+    <a asp-action="Index">Повернутися до списку</a>
+</form>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CMSWebAppLab1.Models.Movie>
+
+@{
+    ViewData["Title"] = "Фільми";
+}
+
+<h1>CRUD: Фільми</h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Створити новий запис</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Назва
+            </th>
+            <th>
+                Тривалість, хв
+            </th>
+            <th>
+                Жанр
+            </th>
+            <th>
+                Рік виходу
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
+
+                        <span> | </span>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <span> | </span>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

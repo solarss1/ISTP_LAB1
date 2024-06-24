@@ -1,0 +1,43 @@
+﻿@model CMSWebAppLab1.Models.Session
+
+@{
+    ViewData["Title"] = "Деталі";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <h4>Сеанс</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Початок:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt class = "col-sm-2">
+            Ціна:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            Зала:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hall.HallName)
+        </dd>
+        <dt class = "col-sm-2">
+            Фільм:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Title)
+        </dd>
+    </dl>
+</div>
+<p></p>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Редагувати</a> |
+    <a asp-action="Index">Повернутися до списку</a>
+</div>
